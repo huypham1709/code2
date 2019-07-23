@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button onclick="restart()">RESET</button>
+<canvas id="myCanvas" height="560" width="1350" style="border: 1px solid #000000"></canvas>
+<iframe src="silence.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
+<img  src="hinh-nen-powerpoint-cntt%20(1).jpg" height="50" width="1350" usemap="#mapRemote" />
+<map name = "mapRemote">
+    <area shape="rect" coords="0, 0, 250, 50" onclick="draw()"/>
+    <area shape="rect" coords="290, 0, 525, 50" onclick="draw1()"/>
+    <area shape="rect" coords="550, 0, 790, 50" onclick="draw2()"/>
+    <area shape="rect" coords="840, 0, 1050, 50" onclick="draw3()"/>
+    <area shape="rect" coords="1090, 0, 1352, 50" onclick="draw4()"/>
+</map>
+<!--<audio id="player" autoplay loop>-->
+<!--    <source src="NguoiTinhNhoBe-BigDaddyEmily-5991544.mp3" type="audio/mp3">-->
+<!--</audio>-->
+<img  id="my" src="10.jpg" width="0" height="0">
+<img src="10.1.jpg" width="0" height="0" id="my1">
+<img src="10.2.jpg" width="0" height="0" id="my2">
+<img src="10.3.jfif" width="0" height="0" id="my3">
+<img src="10.4.jfif" width="0" height="0" id="my4">
+<script>
+//     let canvas = document.getElementById("myCanvas");
+//     let ctx = canvas.getContext("2d");
+//     let ball = {
+//         x: canvas.width/2,
+//         y: canvas.height - 100,
+//         dx:10,
+//         dy: 5,
+//         radius: 15,
+//     };
+//     let brick = {
+//         setX: 25,
+//         setY: 25,
+//         margin: 5,
+//         width: 80,
+//         height: 25,
+//         row: 15,
+//         col: 5,
+//     };
+//     let list = [];
+//     for (let i = 0; i < brick.row; i++) {
+//         for (let j = 0; j < brick.col; j++) {
+//             list.push({
+//                 x: brick.setX + i * (brick.width + brick.margin),
+//                 y: brick.setY + j * (brick.height + brick.margin),
+//                 isBroken: false,
+//             })
+//         }
+//     }
+//     let thanh = {
+//         width: 130,
+//         height: 30,
+//         x: canvas.width/2 + 100,
+//         y: canvas.height - 10,
+//         speed: 20,
+//
+//         isMovingLeft: false,
+//         isMovingRight: false
+//     };
+//     let isGameOver = false;
+//     let isGameWin=false;
+//     let score = 0;
+//     let maxscore= brick.col*brick.row;
+//     document.addEventListener('keyup', function (event) {
+//         console.log('KEY UP');
+//         console.log(event);
+//         if (event.keyCode == 37) {
+//             thanh.isMovingLeft = false;
+//         } else if (event.keyCode == 39) {
+//             thanh.isMovingRight = false;
+//         }
+//     });
+//     document.addEventListener('keydown', function (event) {
+//         console.log('KEY DOWN');
+//         console.log(event);
+//         if (event.keyCode == 37) {
+//             thanh.isMovingLeft = true;
+//         } else if (event.keyCode == 39) {
+//             thanh.isMovingRight = true;
+//         }
+//     });
+//     function nen() {
+//         let canvas = document.getElementById("myCanvas");
+//         let ctx = canvas.getContext("2d");
+//         let img = document.getElementById("my");
+//         ctx.drawImage(img, 0, 0, 1350, 560);
+//     }
+// function drawBall() {
+//     ctx.beginPath();
+//     ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+//     ctx.fillStyle = "white";
+//     ctx.fill();
+//     ctx.closePath();
+// }
+// function hcn() {
+//     ctx.beginPath();
+//     ctx.rect(thanh.x, thanh.y, thanh.width, thanh.height);
+//     ctx.fillStyle = 'skyblue';
+//     ctx.fill();
+//     ctx.closePath();
+// }
+// function drawBrick() {
+//     list.forEach(function (a) {
+//         if (!a.isBroken) {
+//             ctx.beginPath();
+//             ctx.rect(a.x, a.y, brick.width, brick.height);
+//             ctx.fillStyle = "snow";
+//             ctx.fill();
+//             ctx.closePath()
+//         }
+//     });
+// }
+// function fun() {
+//     if (ball.x < ball.radius || ball.x > canvas.width - ball.radius) {
+//         ball.dx = -ball.dx;
+//     }
+//     if (ball.y < ball.radius) {
+//         ball.dy = -ball.dy;
+//     }
+// }
+// function up() {
+//     if (ball.x + ball.radius >= thanh.x && ball.x + ball.radius <= thanh.x + thanh.width && ball.y + ball.radius >= canvas.height - thanh.height) {
+//         ball.dy = -ball.dy;
+//     }
+// }
+//
+// function update() {
+//     ball.x += ball.dx;
+//     ball.y += ball.dy;
+// }
+//
+// function up1() {
+//     if (ball.y > canvas.height - ball.radius) {
+//         isGameOver = true;
+//     }
+// }
+//
+// function hienthi() {
+//     if (isGameWin){
+//         alert("You Win.Số điểm:" + score + "điểm" );
+//     } else {
+//         alert("You Lose.Số điểm:" + score + "điểm");
+//     }
+// }
+// function drawscore() {
+//     ctx.beginPath();
+//     ctx.font = "20px arial";
+//     ctx.fillStyle = 'white';
+//     ctx.fillText('Điểm: ' + score,100,500);
+//     ctx.closePath();
+// }
+// function broke() {
+//     list.forEach(function (a) {
+//         if (!a.isBroken) {
+//             if (ball.x >= a.x && ball.x <= a.x + brick.width && ball.y + ball.radius >= a.y && ball.y - ball.radius <= a.y + brick.height) {
+//                 ball.dy = -ball.dy;
+//                 a.isBroken = true;
+//                 score += 1;
+//                 if (score >= maxscore) {
+//                     isGameOver = true;
+//                     isGameWin = true;
+//                 }
+//             }
+//         }
+//     });
+//
+// }
+// function update1() {
+//     if (thanh.isMovingLeft) {
+//         thanh.x -= thanh.speed;
+//     } else if (thanh.isMovingRight) {
+//         thanh.x += thanh.speed
+//     }
+//     if (thanh.x < 0) {
+//         thanh.x = 0;
+//     } else if (thanh.x > canvas.width - thanh.width) {
+//         thanh.x = canvas.width - thanh.width
+//     }
+//
+// }
+// function draw() {
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
+//     if (!isGameOver) {
+//         nen();
+//         drawBall();
+//         hcn();
+//         drawBrick();
+//         drawscore();
+//         update1();
+//         fun();
+//         broke();
+//         up();
+//         update();
+//         up1();
+//         requestAnimationFrame(draw);
+//     } else {
+//         hienthi();
+//     }
+// }
+//
+
+
+
+
+    let canvas1 = document.getElementById("myCanvas");
+    let ctx1 = canvas1.getContext("2d");
+    let ball1 = {
+        x: canvas1.width/2,
+        y: canvas1.height - 100,
+        dx:10,
+        dy: 5,
+        radius: 15,
+    };
+    let brick1 = {
+        setX: 25,
+        setY: 25,
+        margin: 5,
+        width: 80,
+        height: 25,
+        row: 15,
+        col: 5,
+    };
+    let list1 = [];
+    for (let i = 0; i < brick1.row; i++) {
+        for (let j = 0; j < brick1.col; j++) {
+            list1.push({
+                x: brick1.setX + i * (brick1.width + brick1.margin),
+                y: brick1.setY + j * (brick1.height + brick1.margin),
+                isBroken: false,
+            })
+        }
+    }
+    let thanh1 = {
+        width: 130,
+        height: 30,
+        x: canvas1.width/2 + 100,
+        y: canvas1.height - 10,
+        speed: 20,
+
+        isMovingLeft: false,
+        isMovingRight: false
+    };
+    let isGameOver1 = false;
+    let isGameWin1=false;
+    let score1 = 0;
+    let maxscore1= brick1.col*brick1.row;
+    document.addEventListener('keyup', function (event) {
+        console.log('KEY UP');
+        console.log(event);
+        if (event.keyCode == 37) {
+            thanh1.isMovingLeft = false;
+        } else if (event.keyCode == 39) {
+            thanh1.isMovingRight = false;
+        }
+    });
+    document.addEventListener('keydown', function (event) {
+        console.log('KEY DOWN');
+        console.log(event);
+        if (event.keyCode == 37) {
+            thanh1.isMovingLeft = true;
+        } else if (event.keyCode == 39) {
+            thanh1.isMovingRight = true;
+        }
+    });
+    function nen1() {
+        let canvas1 = document.getElementById("myCanvas");
+        let ctx1 = canvas1.getContext("2d");
+        let img = document.getElementById("my1");
+        ctx1.drawImage(img, 0, 0, 1350, 560);
+    }
+    function drawBall1() {
+        ctx1.beginPath();
+        ctx1.arc(ball1.x, ball1.y, ball1.radius, 0, Math.PI * 2);
+        ctx1.fillStyle = "red";
+        ctx1.fill();
+        ctx1.closePath();
+    }
+    function hcn1() {
+        ctx1.beginPath();
+        ctx1.rect(thanh1.x, thanh1.y, thanh1.width, thanh1.height);
+        ctx1.fillStyle = 'red';
+        ctx1.fill();
+        ctx1.closePath();
+    }
+    function drawBrick1() {
+        list1.forEach(function (a1) {
+            if (!a1.isBroken) {
+                ctx1.beginPath();
+                ctx1.rect(a1.x, a1.y, brick1.width, brick1.height);
+                ctx1.fillStyle = "black";
+                ctx1.fill();
+                ctx1.closePath()
+            }
+        });
+    }
+    function fun1() {
+        if (ball1.x < ball1.radius || ball1.x > canvas1.width - ball1.radius) {
+            ball1.dx = -ball1.dx;
+        }
+        if (ball1.y < ball1.radius) {
+            ball1.dy = -ball1.dy;
+        }
+    }
+    function up1() {
+        if (ball1.x + ball1.radius >= thanh1.x && ball1.x + ball1.radius <= thanh1.x + thanh1.width && ball1.y + ball1.radius >= canvas1.height - thanh1.height) {
+            ball1.dy = -ball1.dy;
+        }
+    }
+
+    function update1() {
+        ball1.x += ball1.dx;
+        ball1.y += ball1.dy;
+    }
+
+    function up11() {
+        if (ball1.y > canvas1.height - ball1.radius) {
+            isGameOver1 = true;
+        }
+    }
+
+    function hienthi1() {
+        if (isGameWin1){
+            alert("You Win.Số điểm:" + score1 + "điểm" );
+        } else {
+            alert("You Lose.Số điểm:" + score1 + "điểm");
+        }
+    }
+    function drawscore1() {
+        ctx1.beginPath();
+        ctx1.font = "20px arial";
+        ctx1.fillStyle = 'white';
+        ctx1.fillText('Điểm: ' + score1,100,500);
+        ctx1.closePath();
+    }
+    function broke1() {
+        list1.forEach(function (a1) {
+            if (!a1.isBroken) {
+                if (ball1.x >= a1.x && ball1.x <= a1.x + brick1.width && ball1.y + ball1.radius >= a1.y && ball1.y - ball1.radius <= a1.y + brick1.height) {
+                    ball1.dy = -ball1.dy;
+                    a1.isBroken = true;
+                    score1 += 1;
+                    if (score1 >= maxscore1) {
+                        isGameOver1 = true;
+                        isGameWin1 = true;
+                    }
+                }
+            }
+        });
+
+    }
+    function update11() {
+        if (thanh1.isMovingLeft) {
+            thanh1.x -= thanh1.speed;
+        } else if (thanh1.isMovingRight) {
+            thanh1.x += thanh1.speed
+        }
+        if (thanh1.x < 0) {
+            thanh1.x = 0;
+        } else if (thanh1.x > canvas1.width - thanh1.width) {
+            thanh1.x = canvas1.width - thanh1.width
+        }
+
+    }
+    function draw1() {
+        ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+        if (!isGameOver1) {
+            nen1();
+            drawBall1();
+            hcn1();
+            drawBrick1();
+            drawscore1();
+            update11();
+            fun1();
+            broke1();
+            up1();
+            update1();
+            up11();
+            requestAnimationFrame(draw1);
+        } else {
+            hienthi1();
+        }
+    }
+    function restart() {
+    location.reload();
+}
+ </script>
+</body>
+</html>
